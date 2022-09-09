@@ -8,8 +8,14 @@ for(let i = 0; i < 16; i++){
         square.classList.add("square");
         square.style.width = `calc(${WIDTH}px / 16)`;
         square.style.height = `calc(${WIDTH}px / 16)`;
-        square.style.backgroundColor = "white";
 
         container.appendChild(square);
     }
 }
+
+const squares = document.querySelectorAll(".square");
+squares.forEach(square => {
+    square.addEventListener("mouseover", () => {
+        square.classList.add("color");
+    })
+});
