@@ -1,8 +1,12 @@
 "use strict"
 
-const WIDTH = 600;
+const WIDTH = 550;
 const container = document.querySelector(".container");
-const grid = +prompt("Squares per side?", "1");
+container.style.width = `${WIDTH}px`;
+container.style.height = `${WIDTH}px`;
+
+// const grid = +prompt("Squares per side?", "1");
+const grid = 16;
 
 for(let i = 0; i < grid; i++){
     for(let j = 0; j < grid; j++){
