@@ -34,11 +34,21 @@ function makeGrid(grid){
 }
 
 function colorSquares(){
+    let isPressed = false;
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
-        square.addEventListener("mouseover", () => {
+        square.addEventListener("mousedown", () => {
             square.classList.add("color");
-        })
+            isPressed = true;
+        });
+        square.addEventListener("mouseup", () => {
+            isPressed = false;
+        });
+        square.addEventListener("mouseover", () => {
+            if(isPressed == true){
+                square.classList.add("color");
+            }
+        });
     });
 }
 
