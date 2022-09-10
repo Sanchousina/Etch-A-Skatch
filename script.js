@@ -3,13 +3,15 @@
 const WIDTH = 550;
 let grid = 16;
 let color = 'black';
+let bg = 'white';
 
 const container = document.querySelector(".container");
 const slider = document.querySelector(".slider__input");
 const slider__label = document.querySelector(".slider__label");
 const penColor = document.querySelector("#pen-color");
+const bgColor = document.querySelector("#bg-color");
 
-setContainerWidth(WIDTH);
+setContainer(bg);
 makeGrid(grid);
 colorSquares(color);
 setSliderLabel();
@@ -24,15 +26,21 @@ slider.addEventListener("input", () => {
 penColor.addEventListener("input", () => {
     color = penColor.value;
     colorSquares(color);
-})
+});
+
+bgColor.addEventListener("input", () => {
+    bg = bgColor.value;
+    setContainer(bg);
+});
 
 function setSliderLabel(){
     slider__label.textContent = slider.value;
 }
 
-function setContainerWidth(width){
-    container.style.width = `${width}px`;
-    container.style.height = `${width}px`;
+function setContainer(color){
+    container.style.width = `${WIDTH}px`;
+    container.style.height = `${WIDTH}px`;
+    container.style.backgroundColor = `${color}`;
 }
 
 function makeGrid(grid){
@@ -55,7 +63,6 @@ function colorSquares(color){
     squares.forEach(square => {
         square.addEventListener("mousedown", (e) => {
             e.target.style.backgroundColor = `${color}`;
-            //square.classList.add("colored");
             isPressed = true;
         });
         square.addEventListener("mouseup", () => {
@@ -64,14 +71,10 @@ function colorSquares(color){
         square.addEventListener("mouseover", (e) => {
             if(isPressed == true){
                 e.target.style.backgroundColor = `${color}`;
-                //square.classList.add("colored");
             }
         });
     });
 }
 
-// function clear(){
-//     squares.forEach(square => square.classList.remove("color"));
-// }
 
 

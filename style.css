@@ -37,11 +37,11 @@ html, body{
     margin-bottom: 50px;
 }
 .square{
-    background-color: #ffff;
+    background-color: transparent;
 }
-.colored{
+/* .colored{
     background-color: #000;
-}
+} */
 /* ------------------------------------------------ */
 .slider {
     width: 100%;
@@ -72,6 +72,9 @@ html, body{
 }
 /* -------------------------------------------------- */
 .side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .color-picker {
     display: flex;
