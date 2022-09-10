@@ -1,10 +1,11 @@
 "use strict"
 
 const WIDTH = 550;
+
 const container = document.querySelector(".container");
-container.style.width = `${WIDTH}px`;
-container.style.height = `${WIDTH}px`;
 const grid = 16;
+
+setContainerWidth(WIDTH);
 makeGrid(grid);
 colorSquares();
 
@@ -18,6 +19,11 @@ slider.addEventListener("input", () => {
     makeGrid(slider.value);
     colorSquares();
 });
+
+function setContainerWidth(width){
+    container.style.width = `${width}px`;
+    container.style.height = `${width}px`;
+}
 
 function makeGrid(grid){
     container.innerHTML = "";
