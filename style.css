@@ -15,12 +15,21 @@ html, body{
 .wrapper{
     overflow: hidden;
     min-height: 100%;
+}
+/* --------------------------------------------- */
+.main{
+    padding-top: 100px;
+    display: flex;
+    gap: 100px;
+    align-items: flex-start;
+    justify-content: center;
+}
+.main-panel{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-/* --------------------------------------------- */
 .container{
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5), -5px -6px 5px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -30,10 +39,12 @@ html, body{
 .square{
     background-color: #ffff;
 }
-.square.color{
+.colored{
     background-color: #000;
 }
+/* ------------------------------------------------ */
 .slider {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,4 +69,31 @@ html, body{
     border-radius: 50%;
     box-shadow: 3px 3px 3px rgb(84, 2, 95);
     cursor: pointer; 
+}
+/* -------------------------------------------------- */
+.side-panel {
+}
+.color-picker {
+    display: flex;
+}
+.color-picker__label{
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.color-picker__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.color-picker__input::-webkit-color-swatch{
+    border-radius: 50%;
+    border: none;
+    box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.5);
 }

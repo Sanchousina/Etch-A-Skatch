@@ -10,11 +10,19 @@
 <body>
     <div class="wrapper">
         <div class="main">
-            <div class="container">
+            <div class="main-panel">
+                <div class="container">
+                </div>
+                <div class="slider">
+                    <label for="slider__input" class="slider__label">Value</label>
+                    <input type="range" id="slider__input" class="slider__input" min="1" max="100" value="16">
+                </div>
             </div>
-            <div class="slider">
-                <label for="slider__input" class="slider__label">Value</label>
-                <input type="range" id="slider__input" class="slider__input" min="1" max="100" value="16">
+            <div class="side-panel">
+                <div class="color-picker">
+                    <input type="color" value="#000000" class="color-picker__input" id="pen-color">
+                    <label for="pen-color" class="color-picker__label">Pen</label>
+                </div>
             </div>
         </div>
     </div>

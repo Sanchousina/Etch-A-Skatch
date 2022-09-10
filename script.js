@@ -1,24 +1,34 @@
 "use strict"
 
 const WIDTH = 550;
+let grid = 16;
+let color = 'black';
 
 const container = document.querySelector(".container");
-const grid = 16;
+const slider = document.querySelector(".slider__input");
+const slider__label = document.querySelector(".slider__label");
+const penColor = document.querySelector("#pen-color");
 
 setContainerWidth(WIDTH);
 makeGrid(grid);
-colorSquares();
-
-const slider = document.querySelector(".slider__input");
-const slider__label = document.querySelector(".slider__label");
-
-slider__label.textContent = slider.value;
+colorSquares(color);
+setSliderLabel();
 
 slider.addEventListener("input", () => {
-    slider__label.textContent = slider.value;
-    makeGrid(slider.value);
-    colorSquares();
+    setSliderLabel();
+    grid = slider.value;
+    makeGrid(grid);
+    colorSquares(color);
 });
+
+penColor.addEventListener("input", () => {
+    color = penColor.value;
+    colorSquares(color);
+})
+
+function setSliderLabel(){
+    slider__label.textContent = slider.value;
+}
 
 function setContainerWidth(width){
     container.style.width = `${width}px`;
@@ -39,20 +49,22 @@ function makeGrid(grid){
     }
 }
 
-function colorSquares(){
+function colorSquares(color){
     let isPressed = false;
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
-        square.addEventListener("mousedown", () => {
-            square.classList.add("color");
+        square.addEventListener("mousedown", (e) => {
+            e.target.style.backgroundColor = `${color}`;
+            //square.classList.add("colored");
             isPressed = true;
         });
         square.addEventListener("mouseup", () => {
             isPressed = false;
         });
-        square.addEventListener("mouseover", () => {
+        square.addEventListener("mouseover", (e) => {
             if(isPressed == true){
-                square.classList.add("color");
+                e.target.style.backgroundColor = `${color}`;
+                //square.classList.add("colored");
             }
         });
     });
