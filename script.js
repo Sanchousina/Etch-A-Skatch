@@ -13,6 +13,7 @@ const penColor = document.querySelector("#pen-color");
 const bgColor = document.querySelector("#bg-color");
 const eraser = document.querySelector("#btn-eraser");
 const clearBtn = document.querySelector("#btn-clear");
+const buttons = document.querySelectorAll("button");
 
 setContainer(bg);
 makeGrid(grid);
@@ -49,6 +50,15 @@ eraser.addEventListener("click", () => {
 clearBtn.addEventListener("click", () => {
     squares.forEach(square => square.style.backgroundColor = "transparent");
 });
+
+buttons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        buttons.forEach(button => button.classList.remove("pressed"));
+        if(e.target != clearBtn){
+            e.target.classList.add("pressed");
+        }
+    })
+})
 
 function setSliderLabel(){
     slider__label.textContent = slider.value;
