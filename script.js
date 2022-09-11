@@ -12,11 +12,15 @@ const slider__label = document.querySelector(".slider__label");
 const penColor = document.querySelector("#pen-color");
 const bgColor = document.querySelector("#bg-color");
 const eraser = document.querySelector("#btn-eraser");
+const clearBtn = document.querySelector("#btn-clear");
 
 setContainer(bg);
 makeGrid(grid);
+const squares = document.querySelectorAll(".square");
+
 colorSquares(color);
 setSliderLabel();
+
 
 slider.addEventListener("input", () => {
     setSliderLabel();
@@ -37,10 +41,14 @@ bgColor.addEventListener("input", () => {
     setContainer(bg);
 });
 
-eraser.addEventListener("click", (e) => {
+eraser.addEventListener("click", () => {
     eraseMode = true;
     eraser.classList.add("pressed");
-})
+});
+
+clearBtn.addEventListener("click", () => {
+    squares.forEach(square => square.style.backgroundColor = "transparent");
+});
 
 function setSliderLabel(){
     slider__label.textContent = slider.value;
@@ -68,7 +76,6 @@ function makeGrid(grid){
 
 function colorSquares(color){
     let isPressed = false;
-    const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
         square.addEventListener("mousedown", (e) => {
             if(eraseMode == true){
