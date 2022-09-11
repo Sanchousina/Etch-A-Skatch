@@ -39,9 +39,6 @@ html, body{
 .square{
     background-color: transparent;
 }
-/* .colored{
-    background-color: #000;
-} */
 /* ------------------------------------------------ */
 .slider {
     width: 100%;
@@ -99,4 +96,21 @@ html, body{
     border-radius: 50%;
     border: none;
     box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.5);
+}
+/* ------------------------------------------------ */
+.button {
+    padding: 15px 30px;
+    background-color: transparent;
+    border: 3px solid #2ca593;
+    border-radius: 5px;
+    font-size: inherit;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    color: #2ca593;
+    transition: all 0.3s ease 0s;
+}
+
+.button:hover, .button:active, .button.pressed{
+    background-color: #2ca593;
+    color: #ffff;
 }

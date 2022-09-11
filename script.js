@@ -4,12 +4,14 @@ const WIDTH = 550;
 let grid = 16;
 let color = 'black';
 let bg = 'white';
+let eraseMode = false;
 
 const container = document.querySelector(".container");
 const slider = document.querySelector(".slider__input");
 const slider__label = document.querySelector(".slider__label");
 const penColor = document.querySelector("#pen-color");
 const bgColor = document.querySelector("#bg-color");
+const eraser = document.querySelector("#btn-eraser");
 
 setContainer(bg);
 makeGrid(grid);
@@ -24,14 +26,21 @@ slider.addEventListener("input", () => {
 });
 
 penColor.addEventListener("input", () => {
+    eraseMode = false;
     color = penColor.value;
     colorSquares(color);
+    eraser.classList.remove("pressed");
 });
 
 bgColor.addEventListener("input", () => {
     bg = bgColor.value;
     setContainer(bg);
 });
+
+eraser.addEventListener("click", (e) => {
+    eraseMode = true;
+    eraser.classList.add("pressed");
+})
 
 function setSliderLabel(){
     slider__label.textContent = slider.value;
@@ -62,7 +71,11 @@ function colorSquares(color){
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
         square.addEventListener("mousedown", (e) => {
-            e.target.style.backgroundColor = `${color}`;
+            if(eraseMode == true){
+                e.target.style.backgroundColor = `transparent`;
+            }else{
+                e.target.style.backgroundColor = `${color}`;
+            }
             isPressed = true;
         });
         square.addEventListener("mouseup", () => {
@@ -70,7 +83,11 @@ function colorSquares(color){
         });
         square.addEventListener("mouseover", (e) => {
             if(isPressed == true){
-                e.target.style.backgroundColor = `${color}`;
+                if(eraseMode == true){
+                    e.target.style.backgroundColor = `transparent`;
+                }else{
+                    e.target.style.backgroundColor = `${color}`;
+                }
             }
         });
     });
