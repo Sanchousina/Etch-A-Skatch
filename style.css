@@ -28,6 +28,7 @@ h1{
     gap: 100px;
     align-items: flex-start;
     justify-content: center;
+    padding-bottom: 100px;
 }
 .main-panel{
     display: flex;
