@@ -6,6 +6,7 @@ let color = 'black';
 let bg = 'white';
 let eraseMode = false;
 let rainbowMode = false;
+let colorMode = true;
 
 const container = document.querySelector(".container");
 const slider = document.querySelector(".slider__input");
@@ -15,29 +16,32 @@ const bgColor = document.querySelector("#bg-color");
 const eraser = document.querySelector("#btn-eraser");
 const clearBtn = document.querySelector("#btn-clear");
 const rainbowBtn = document.querySelector('#btn-rainbow');
+const colorBtn = document.querySelector("#btn-color");
 const buttons = document.querySelectorAll("button");
 
 setContainer(bg);
 makeGrid(grid);
-const squares = document.querySelectorAll(".square");
-
 colorSquares(color);
 setSliderLabel();
+checkMode();
 
 slider.addEventListener("input", () => {
     setSliderLabel();
     grid = slider.value;
     makeGrid(grid);
     colorSquares(color);
+    console.log(color);
 });
 
 penColor.addEventListener("input", () => {
+    colorMode = true;
     eraseMode = false;
     rainbowMode = false;
     color = penColor.value;
     colorSquares(color);
     eraser.classList.remove("pressed");
     rainbowBtn.classList.remove("pressed");
+    colorBtn.classList.add("pressed");
 });
 
 bgColor.addEventListener("input", () => {
@@ -51,22 +55,43 @@ eraser.addEventListener("click", () => {
     colorSquares();
 });
 
-clearBtn.addEventListener("click", () => {
+clearBtn.addEventListener("mousedown", () => {
+    const squares = document.querySelectorAll(".square");
     squares.forEach(square => square.style.backgroundColor = "transparent");
+    eraseMode = false;
 });
+
 
 rainbowBtn.addEventListener("click", () => {
     rainbowMode = true;
-})
+    eraseMode = false;
+    colorMode = false;
+});
+
+colorBtn.addEventListener("click", () => {
+    colorMode = true;
+    eraseMode = false;
+    rainbowMode = false;
+});
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         buttons.forEach(button => button.classList.remove("pressed"));
-        if(e.target != clearBtn){
-            e.target.classList.add("pressed");
+        e.target.classList.add("pressed");
+        if(e.target == clearBtn){
+            checkMode();
+            e.target.classList.remove("pressed");
         }
     })
-})
+});
+
+function checkMode(){
+    if(colorMode == true) {
+        colorBtn.classList.add("pressed");
+    }else if(rainbowMode == true){
+        rainbowBtn.classList.add("pressed");
+    }
+}
 
 function setSliderLabel(){
     slider__label.textContent = slider.value;
@@ -102,6 +127,7 @@ function makeRainbowColor(){
 
 function colorSquares(color){
     let isPressed = false;
+    const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
         square.addEventListener("mousedown", (e) => {
             if(eraseMode == true){
