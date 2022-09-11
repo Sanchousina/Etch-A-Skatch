@@ -5,6 +5,7 @@ let grid = 16;
 let color = 'black';
 let bg = 'white';
 let eraseMode = false;
+let rainbowMode = false;
 
 const container = document.querySelector(".container");
 const slider = document.querySelector(".slider__input");
@@ -13,6 +14,7 @@ const penColor = document.querySelector("#pen-color");
 const bgColor = document.querySelector("#bg-color");
 const eraser = document.querySelector("#btn-eraser");
 const clearBtn = document.querySelector("#btn-clear");
+const rainbowBtn = document.querySelector('#btn-rainbow');
 const buttons = document.querySelectorAll("button");
 
 setContainer(bg);
@@ -21,7 +23,6 @@ const squares = document.querySelectorAll(".square");
 
 colorSquares(color);
 setSliderLabel();
-
 
 slider.addEventListener("input", () => {
     setSliderLabel();
@@ -32,9 +33,11 @@ slider.addEventListener("input", () => {
 
 penColor.addEventListener("input", () => {
     eraseMode = false;
+    rainbowMode = false;
     color = penColor.value;
     colorSquares(color);
     eraser.classList.remove("pressed");
+    rainbowBtn.classList.remove("pressed");
 });
 
 bgColor.addEventListener("input", () => {
@@ -44,12 +47,17 @@ bgColor.addEventListener("input", () => {
 
 eraser.addEventListener("click", () => {
     eraseMode = true;
-    eraser.classList.add("pressed");
+    rainbowMode = false;
+    colorSquares();
 });
 
 clearBtn.addEventListener("click", () => {
     squares.forEach(square => square.style.backgroundColor = "transparent");
 });
+
+rainbowBtn.addEventListener("click", () => {
+    rainbowMode = true;
+})
 
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
@@ -84,12 +92,23 @@ function makeGrid(grid){
     }
 }
 
+function makeRainbowColor(){
+    let red = Math.floor(Math.random()*255)+1;
+    let green = Math.floor(Math.random()*255)+1;
+    let blue = Math.floor(Math.random()*255)+1;
+    let rainbowColor = `rgb(${red}, ${green}, ${blue})`;
+    return rainbowColor;
+}
+
 function colorSquares(color){
     let isPressed = false;
     squares.forEach(square => {
         square.addEventListener("mousedown", (e) => {
             if(eraseMode == true){
                 e.target.style.backgroundColor = `transparent`;
+            }
+            if(rainbowMode == true){
+                e.target.style.backgroundColor = makeRainbowColor();
             }else{
                 e.target.style.backgroundColor = `${color}`;
             }
@@ -102,6 +121,9 @@ function colorSquares(color){
             if(isPressed == true){
                 if(eraseMode == true){
                     e.target.style.backgroundColor = `transparent`;
+                }
+                if(rainbowMode == true){
+                    e.target.style.backgroundColor = makeRainbowColor();
                 }else{
                     e.target.style.backgroundColor = `${color}`;
                 }
