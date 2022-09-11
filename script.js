@@ -17,6 +17,7 @@ const eraser = document.querySelector("#btn-eraser");
 const clearBtn = document.querySelector("#btn-clear");
 const rainbowBtn = document.querySelector('#btn-rainbow');
 const colorBtn = document.querySelector("#btn-color");
+const saveBtn = document.querySelector("#btn-save");
 const buttons = document.querySelectorAll("button");
 
 setContainer(bg);
@@ -72,6 +73,19 @@ colorBtn.addEventListener("click", () => {
     colorMode = true;
     eraseMode = false;
     rainbowMode = false;
+});
+
+saveBtn.addEventListener("click", () => {
+    const toSave = document.getElementById("container");
+    html2canvas(toSave).then((canvas) => {
+        const base64image = canvas.toDataURL("image/jpeg");
+        let anchor = document.createElement("a");
+        anchor.setAttribute("href", base64image);
+        anchor.setAttribute("download", "etch-a-scretch.jpeg");
+
+        anchor.click();
+        anchor.remove();
+    });
 });
 
 buttons.forEach(button => {
